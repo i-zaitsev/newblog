@@ -1,15 +1,24 @@
 <script lang="ts">
-    import {onMount} from "svelte";
     import { createResume } from "$lib/cv/data";
     import { type Resume } from "$lib/cv/types";
 
     let email = $state("");
+    let loading = $state(false);
     let resume: Resume = createResume("research");
-    
-    onMount(async () => {
-        const { firstName, lastName, emailDomain } = await (await fetch('/api/cv')).json();
-        email = `${firstName}.${lastName}@${emailDomain}.com`;
-    });
+
+    async function revealEmail() {
+        if (email || loading) return;
+        loading = true;
+        try {
+            const res = await fetch('/api/cv');
+            if (res.ok) {
+                const { local, domain } = await res.json();
+                email = `${local}@${domain}`;
+            }
+        } finally {
+            loading = false;
+        }
+    }
 </script>
 <svelte:head>
     <title>Ilia Zaitsev CV</title>
@@ -18,7 +27,15 @@
 <div id="header">
     <h1>Ilia Zaitsev</h1>
     <ul id="contacts">
-        <li id="email"><a href="mailto:{email}">E-mail</a></li>
+        <li id="email">
+            {#if email}
+                <a href="mailto:{email}">{email}</a>
+            {:else}
+                <button onclick={revealEmail} disabled={loading} class="reveal-email">
+                    {loading ? 'Loading...' : 'Show email'}
+                </button>
+            {/if}
+        </li>
         <li id="linkedin"><a href="https://linkedin.com/in/ilia-zaitsev">LinkedIn</a></li>
         <li id="github"><a href="https://github.com/devforfu">GitHub</a></li>
         <li id="website"><a href="https://iliazaitsev.me">iliazaitsev.me</a></li>
@@ -103,5 +120,18 @@
     @import "../../cv/modern.css";
     :global(.description > ul) {
         margin: 0.5em 0;
+    }
+    .reveal-email {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        color: inherit;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .reveal-email:disabled {
+        cursor: wait;
+        opacity: 0.6;
     }
 </style>
