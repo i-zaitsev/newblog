@@ -1,17 +1,12 @@
 <script lang="ts">
   import '@fontsource/jetbrains-mono';
-  import { dev } from '$app/environment';
-
   import Header from '$lib/components/Header.svelte'
   import Footer from '$lib/components/Footer.svelte'
   import PageTransition from './transition.svelte';
 
   let { children, data } = $props();
 
-  // Toggle this to show/hide the under-development banner in production.
-  // Locally (dev) the banner is always hidden.
-  const SHOW_PLACEHOLDER = true;
-  const showPlaceholder = !dev && SHOW_PLACEHOLDER;
+  const showPlaceholder = true;
 </script>
 {#if showPlaceholder}
 <article class="announcement">
