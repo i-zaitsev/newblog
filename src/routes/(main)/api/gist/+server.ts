@@ -9,8 +9,8 @@ export async function GET({ url }) {
         const api = new Octokit({ auth: GH_TOKEN });
         const response = await api.rest.gists.get({ gist_id: id });
         const files = response.data.files;
-        // @ts-ignore
-        const firstFile = Object.values(files)[0];
+        if (!files) return json({ error: 'no files in gist' }, { status: 404 });
+        const firstFile = Object.values(files).filter(Boolean)[0];
         if (!firstFile) return json({error: 'no files in gist'}, { status: 404 });
         return json(firstFile);
     } catch (error) {

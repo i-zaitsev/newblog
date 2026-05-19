@@ -26,12 +26,10 @@ export async function getPosts(kind: PostsGroup) {
   let groups: Record<string, unknown>[] = [];
 
   if ((kind & PostsGroup.Published) === PostsGroup.Published) {
-    console.log('getting published posts');
     groups.push(import.meta.glob('/src/posts/*.md', { eager: true }));
   }
 
   if ((kind & PostsGroup.Archived) === PostsGroup.Archived) {
-    console.log('getting archived posts');
     groups.push(import.meta.glob('/src/posts/archive/*.md', { eager: true }));
   }
 
@@ -39,8 +37,6 @@ export async function getPosts(kind: PostsGroup) {
 
   for (const group of groups) {
     for (const path in group) {
-      console.log(path);
-
       const file = group[path];
       const slug = path.split('/').at(-1)?.replace('.md', '');
 

@@ -1,6 +1,6 @@
-export type Category = 'sveltekit' | 'svelte';
+export type Category = string;
 
-export type Tag = 'python' | 'rust' | 'cpp' | 'c';
+export type Tag = string;
 
 export type Post = {
   title: string;
