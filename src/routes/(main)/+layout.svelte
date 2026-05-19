@@ -1,5 +1,7 @@
 <script lang="ts">
   import '@fontsource/jetbrains-mono';
+  import { dev } from '$app/environment';
+  import { env } from '$env/dynamic/public';
 
   import Header from '$lib/components/Header.svelte'
   import Footer from '$lib/components/Footer.svelte'
@@ -7,7 +9,7 @@
 
   let { children, data } = $props();
 
-  let showPlaceholder = true;
+  const showPlaceholder = !dev && env.PUBLIC_SHOW_PLACEHOLDER === 'true';
 </script>
 {#if showPlaceholder}
 <article class="announcement">

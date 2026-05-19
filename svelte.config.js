@@ -1,3 +1,6 @@
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+
 import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
@@ -9,10 +12,12 @@ import rehypePrettyCode from 'rehype-pretty-code';
 
 import { THEMES, highlightCode } from './src/lib/highlighter.js';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
   extensions: ['.md'],
-  layout: { _: './src/mdsvex.svelte' },
+  layout: { _: path.resolve(__dirname, './src/mdsvex.svelte') },
   remarkPlugins: [[remarkToc, { tight: true }]],
   rehypePlugins: [
     [rehypeSlug, {}],
