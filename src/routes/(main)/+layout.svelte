@@ -8,7 +8,10 @@
 
   let { children, data } = $props();
 
-  const showPlaceholder = !dev && data.showPlaceholder;
+  // Toggle this to show/hide the under-development banner in production.
+  // Locally (dev) the banner is always hidden.
+  const SHOW_PLACEHOLDER = true;
+  const showPlaceholder = !dev && SHOW_PLACEHOLDER;
 </script>
 {#if showPlaceholder}
 <article class="announcement">
