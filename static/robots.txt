@@ -67,4 +67,6 @@ User-agent: Timpibot
 Disallow: /
 
 User-agent: *
-Disallow: /terms
+Disallow: /about
+Disallow: /imprint
+Disallow: /privacy

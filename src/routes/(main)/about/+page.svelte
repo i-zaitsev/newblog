@@ -1,3 +1,7 @@
+<svelte:head>
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+</svelte:head>
+
 <div class="container">
   <section class="content">
       <div class="photo">
