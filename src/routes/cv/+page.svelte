@@ -38,7 +38,7 @@
         </li>
         <li id="linkedin"><a href="https://linkedin.com/in/ilia-zaitsev">LinkedIn</a></li>
         <li id="github"><a href="https://github.com/devforfu">GitHub</a></li>
-        <li id="website"><a href="https://iliazaitsev.me">iliazaitsev.me</a></li>
+        <li id="website"><a href="https://zaitsev.sh">zaitsev.sh</a></li>
         <li id="location">Hamburg, Germany</li>
     </ul>
 </div>
