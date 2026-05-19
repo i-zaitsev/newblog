@@ -1,12 +1,13 @@
 <script lang="ts">
   import '@fontsource/jetbrains-mono';
+  import { PUBLIC_SHOW_PLACEHOLDER } from '$env/static/public';
   import Header from '$lib/components/Header.svelte'
   import Footer from '$lib/components/Footer.svelte'
   import PageTransition from './transition.svelte';
 
   let { children, data } = $props();
 
-  const showPlaceholder = true;
+  const showPlaceholder = PUBLIC_SHOW_PLACEHOLDER === 'true';
 </script>
 {#if showPlaceholder}
 <article class="announcement">
